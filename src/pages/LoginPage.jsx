@@ -2,16 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TopBar from '../components/TopBar';
 
-Login.propTypes = {
-
-};
-
-function Login(props) {
+function LoginPage(props) {
     return (
         <div>
-            <TopBar />
+            this is login page
         </div>
     );
 }
 
-export default Login;
+export default LoginPage;
