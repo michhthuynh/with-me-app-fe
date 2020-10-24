@@ -2,40 +2,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './UserInfo.scss'
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 UserInfo.propTypes = {
     isLogin: PropTypes.bool.isRequired,
+    display: PropTypes.bool.isRequired,
     username: PropTypes.string
 };
 
 UserInfo.defaultProps = {
+    display: false,
     isLogin: false,
     username: ''
 }
 
 function UserInfo(props) {
-    const { isLogin, username } = props
+    const { isLogin, username, display } = props
     return (
-        <div className="user-info">
+        <div className={display ? "user-info display" : "user-info"}>
             {
                 isLogin ?
                     <ul className="user-info__user">
                         <li>
-                            <NavLink to="">Hoang Thanh Huynh</NavLink>
+                            <div>Hoang Thanh Huynh</div>
                         </li>
                         <li>
-                            <NavLink to="">settings</NavLink>
+                            <span><FontAwesomeIcon icon={faCog} /></span>
+                            <NavLink to="/account">settings</NavLink>
                         </li>
                         <li>
-                            <NavLink to="">Logout</NavLink>
+                            <span><FontAwesomeIcon icon={faSignOutAlt} /></span>
+                            <NavLink to="/auth/logout">Logout</NavLink>
                         </li>
                     </ul> :
                     <ul className="user-info__login">
                         <li>
-                            <NavLink to="">Sign in</NavLink>
+                            <NavLink to="/account/register">Sign in</NavLink>
                         </li>
                         <li>
-                            <NavLink to="">Login</NavLink>
+                            <NavLink to="auth/login">Login</NavLink>
                         </li>
                     </ul>
             }

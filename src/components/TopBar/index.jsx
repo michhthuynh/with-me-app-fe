@@ -23,6 +23,7 @@ function TopBar(props) {
     const inputRef = useRef()
 
     const [isHiddenInput, setIsHiddenInput] = useState(true)
+    const [isShowUserInfo, setIsShowUserInfo] = useState(false)
     console.log(username)
 
     useEffect(() => {
@@ -37,6 +38,10 @@ function TopBar(props) {
 
     const handleBlur = () => {
         setIsHiddenInput(true)
+    }
+
+    const handleShowUserInfo = () => {
+        setIsShowUserInfo(!isShowUserInfo)
     }
 
     return (
@@ -67,15 +72,15 @@ function TopBar(props) {
                         }
                     </li>
                     <li>
-                        <NavLink to="/">
+                        <NavLink to="/account/vip">
                             <FontAwesomeIcon icon={faVial} />
                         </NavLink>
                     </li>
                     <li style={{ position: "relative" }}>
-                        <NavLink to="/">
+                        <button onClick={handleShowUserInfo}>
                             <FontAwesomeIcon icon={faUser} />
-                        </NavLink>
-                        <UserInfo username="test" isLogin={false} />
+                        </button>
+                        <UserInfo username="test" display={isShowUserInfo} isLogin={false} />
                     </li>
                 </ul>
             </div>
