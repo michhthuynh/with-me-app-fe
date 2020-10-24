@@ -1,14 +1,48 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
-import React from 'react';
+import { faAngleRight, faSearch, faUser, faVial } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo-violet.png'
+import './TopBar.scss'
+import { useRef, useEffect } from 'react'
+import PropTypes from 'prop-types';
+import UserInfo from '../UserInfo';
+
+TopBar.propTypes = {
+    username: PropTypes.string,
+    isLogin: PropTypes.bool
+}
+
+TopBar.defaultProp = {
+    username: '',
+    isLogin: false
+}
 
 function TopBar(props) {
+    const { isLogin, username } = props
+    const inputRef = useRef()
+
+    const [isHiddenInput, setIsHiddenInput] = useState(true)
+    console.log(username)
+
+    useEffect(() => {
+        if (!isHiddenInput) {
+            inputRef.current.focus();
+        }
+    }, [isHiddenInput]);
+
+    const handleHiddenSearch = () => {
+        setIsHiddenInput(false)
+    }
+
+    const handleBlur = () => {
+        setIsHiddenInput(true)
+    }
+
     return (
         <div className="top-bar">
-            <NavLink to="/"><img src={logo} /></NavLink>
             <div className="top-bar__left">
+                <NavLink to="/" className="logo"><img src={logo} /></NavLink>
                 <ul>
                     <li>
                         <NavLink to="/categories/tv-series">TV Series</NavLink>
@@ -24,9 +58,24 @@ function TopBar(props) {
             <div className="top-bar__right">
                 <ul>
                     <li>
-                        <button>
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
+                        {
+                            isHiddenInput ?
+                                <button onClick={handleHiddenSearch} htmlFor="search-bar">
+                                    <FontAwesomeIcon icon={faSearch} />
+                                </button> :
+                                <input type="text" className={isHiddenInput ? "hidden" : ""} id="searchBar" onBlur={handleBlur} ref={inputRef} />
+                        }
+                    </li>
+                    <li>
+                        <NavLink to="/">
+                            <FontAwesomeIcon icon={faVial} />
+                        </NavLink>
+                    </li>
+                    <li style={{ position: "relative" }}>
+                        <NavLink to="/">
+                            <FontAwesomeIcon icon={faUser} />
+                        </NavLink>
+                        <UserInfo username="test" isLogin={false} />
                     </li>
                 </ul>
             </div>

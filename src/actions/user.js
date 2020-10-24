@@ -4,3 +4,10 @@ export const verifyLogin = isAuthentication => {
         payload: isAuthentication
     }
 }
+
+export const getUsername = username => {
+    return {
+        type: 'GET_USERNAME',
+        payload: username
+    }
+}

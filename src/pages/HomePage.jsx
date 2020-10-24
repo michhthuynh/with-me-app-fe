@@ -1,14 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { getUsername } from '../actions/user';
 import TopBar from '../components/TopBar';
 
 function HomePage(props) {
     const isLogin = useSelector(state => state.user.isAuthentication)
-    console.log('is Authentication: ', isLogin)
-
+    const username = useSelector(state => state.user.username)
     return (
         <div className="wrapper">
-            <TopBar isLogin={isLogin} />
+            <TopBar isLogin={isLogin} username={username} />
         </div>
     );
 }

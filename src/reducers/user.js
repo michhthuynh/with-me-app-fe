@@ -1,5 +1,6 @@
 const initialState = {
-    isAuthentication: false
+    isAuthentication: false,
+    username: ""
 }
 
 const userReducer = (state = initialState, action) => {
@@ -8,6 +9,14 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuthentication: !state.isAuthentication
+            }
+        }
+
+        case 'GET_USERNAME': {
+            const username = action.payload
+            return {
+                ...state,
+                username: username
             }
         }
 
