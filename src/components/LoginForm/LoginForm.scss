@@ -59,6 +59,9 @@
                     border-bottom: 1px solid black;
                     transition: all 0.3s linear;
                 }
+                .error-message {
+                    color: red;
+                }
                 label {
                     position: absolute;
                     color: rgba($color: #000000, $alpha: 0.3);
@@ -68,7 +71,7 @@
                     left: 4px;
                     transition: all 0.3s linear;
                 }
-
+                
                 input:focus,
                 input:valid {
                     border-bottom: 1.5px solid blueviolet;
