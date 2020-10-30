@@ -21,13 +21,13 @@ function InputField(props) {
     type, label, placeholder, disable
   } = props
 
-  const {name} = field
+  const { name } = field
   const { errors, touched } = form
-  const showError = errors[name] && touched[name]
+  const showError = touched[name] && errors[name]
   return (
     <div className="form-group">
       <input
-        id={name} 
+        id={name}
         {...field}
 
         type={type}
@@ -36,8 +36,8 @@ function InputField(props) {
       />
       <label htmlFor={name}>{label}</label>
       {
-        showError && 
-        <p className="error-message">
+        showError &&
+        <p className="form-group__error-message">
           {
             errors[name]
           }

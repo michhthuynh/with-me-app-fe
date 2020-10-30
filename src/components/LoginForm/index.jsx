@@ -1,33 +1,46 @@
-import React from 'react';
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from 'react';
 import './LoginForm.scss'
-import logo from '../../assets/logo-violet.png'
 import { NavLink } from 'react-router-dom';
 import { FastField, Form, Formik } from 'formik'
 import InputField from '../../custom-fields/InputField';
 import * as Yup from 'yup'
+import userApi from '../../api/userApi';
+
+const msgRequired = '* This field is required'
+const msgUserFail = '* Username is not available'
+const msgPasswordFail = '* Password is not available'
 
 function LoginForm(props) {
+  const [errorMsg, setErrorMsg] = useState('')
   const initialValue = {
     username: '',
     password: '',
   }
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required('Username is required'),
-    password: Yup.string().required('Username is required'),
+    username: Yup.string().required(msgRequired).min(6, msgUserFail).max(16, msgUserFail).trim(msgUserFail),
+    password: Yup.string().required(msgRequired).min(6, msgPasswordFail).max(16, msgPasswordFail).trim(msgPasswordFail),
   })
+
+  const fetchUserLogin = async (values) => {
+    try {
+      const response = await userApi.postLogin({ username: values.username, password: values.password })
+      console.log(response)
+    } catch (error) {
+      setErrorMsg('* Username or password is invalid')
+    }
+  }
 
   return (
     <Formik
       initialValues={initialValue}
       validationSchema={validationSchema}
+      onSubmit={values => {
+        fetchUserLogin(values)
+      }}
     >
       {formikProps => {
-        const {values, errors, touched} = formikProps
-        console.log({values, errors, touched})
-
+        const { errors } = formikProps
         return (
           <Form className="login-form">
             <div className="login-form__title">
@@ -52,7 +65,11 @@ function LoginForm(props) {
                 placeholder=""
               />
               <button type="submit">Login</button>
+              {
+                errorMsg && <div className="login-form__login__error-message">{errorMsg}</div>
+              }
             </div>
+
             <div className="login-form__another">
               <div>
                 Go to
