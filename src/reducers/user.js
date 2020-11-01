@@ -1,5 +1,6 @@
 const initialState = {
     isAuthentication: false,
+    msgError: '',
     username: ""
 }
 
@@ -8,15 +9,14 @@ const userReducer = (state = initialState, action) => {
         case 'VERIFY_LOGIN': {
             return {
                 ...state,
-                isAuthentication: !state.isAuthentication
+                isAuthentication: action.payload
             }
         }
 
-        case 'GET_USERNAME': {
-            const username = action.payload
+        case 'ADD_USERNAME': {
             return {
                 ...state,
-                username: username
+                username: action.payload
             }
         }
 

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight, faSearch, faUser, faVial } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUser, faVial } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo-violet.png'
@@ -24,7 +24,6 @@ function TopBar(props) {
 
     const [isHiddenInput, setIsHiddenInput] = useState(true)
     const [isShowUserInfo, setIsShowUserInfo] = useState(false)
-    console.log(username)
 
     useEffect(() => {
         if (!isHiddenInput) {
@@ -80,7 +79,7 @@ function TopBar(props) {
                         <button onClick={handleShowUserInfo}>
                             <FontAwesomeIcon icon={faUser} />
                         </button>
-                        <UserInfo username="test" display={isShowUserInfo} isLogin={false} />
+                        <UserInfo username={username} display={isShowUserInfo} isLogin={isLogin} />
                     </li>
                 </ul>
             </div>

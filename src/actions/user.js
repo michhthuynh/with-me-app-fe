@@ -5,9 +5,9 @@ export const verifyLogin = isAuthentication => {
     }
 }
 
-export const getUsername = username => {
+export const addUsername = username => {
     return {
-        type: 'GET_USERNAME',
+        type: 'ADD_USERNAME',
         payload: username
     }
 }

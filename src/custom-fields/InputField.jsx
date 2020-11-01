@@ -18,7 +18,7 @@ InputField.defaultProps = {
 function InputField(props) {
   const {
     field, form,
-    type, label, placeholder, disable
+    type, label, disable
   } = props
 
   const { name } = field
