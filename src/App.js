@@ -17,8 +17,10 @@ function App() {
     const fetch = async () => {
       try {
         const response = await auth.getCheckLogin()
-        dispatch(verifyLogin(true))
-        dispatch(addUsername(localStorage.getItem('username')))
+        if(response.status === 200) {
+          dispatch(verifyLogin(true))
+          dispatch(addUsername(localStorage.getItem('username')))
+        }
       } catch (error) {
         console.log('Failed to fetch product list: ', error);
       }
