@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, } from 'react-redux'
-import Slider from '../components/Slider';
+import MovieSlider from '../components/MovieSlider';
 import TopBar from '../components/TopBar';
 
 function HomePage(props) {
@@ -12,17 +12,18 @@ function HomePage(props) {
       region: 'US',
       poster: "",
       actor: ["Justin Bieber", "Robert Downey"],
-      categories: ["action","romantic"],
+      categories: ["action", "romantic"],
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam iure reiciendis delectus distinctio ipsum ratione, commodi, nam harum aperiam esse dolor omnis corporis eos, ipsam accusantium! Reiciendis fuga velit corporis!",
       release_date: "18012019",
       upload_date: "18012018",
       premium: false
     }
   ]
+
   return (
     <div className="wrapper">
       <TopBar isLogin={isLogin} username={username} />
-      <Slider items={items} title="Romantic Movies"/>
+      <MovieSlider items={items} title="Romantic Movies" />
     </div>
   );
 }
